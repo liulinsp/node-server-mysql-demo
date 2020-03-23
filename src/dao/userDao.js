@@ -12,8 +12,8 @@ class UserDao {
      */
     static async queryUserById (connection, id) {
         const sql = `SELECT user.id, user.account, user.name, user.email, user.phone,
-                          user.birthday, user.enable, user.deleteFlag, user.creator,
-                          user.createTime, user.updater, user.updateTime
+                          user.birthday, user.enable, user.deleteFlag, user.createTime,
+                          user.updateTime
                    FROM sys_user user
                    WHERE user.id = ?`;
         const user = await queryOne(connection, sql, id);
@@ -27,8 +27,8 @@ class UserDao {
      */
     static async queryUsers (connection) {
         const sql = `SELECT user.id, user.account, user.name, user.email, user.phone,
-                          user.birthday, user.enable, user.deleteFlag, user.creator,
-                          user.createTime, user.updater, user.updateTime
+                          user.birthday, user.enable, user.deleteFlag, user.createTime, 
+                          user.updateTime
                    FROM sys_user user
                    WHERE user.deleteFlag = ?`;
         const list = await query(connection, sql, [0]);
@@ -43,7 +43,7 @@ class UserDao {
      * @return {Promise.<Array<String>>}
      */
     static async queryUserRoleIds (connection, userId) {
-        const querySql = `SELECT roleId, userId FROM sys_role_users_user WHERE userId = ?`;
+        const querySql = `SELECT roleId, userId FROM sys_r_user_role WHERE userId = ?`;
         const list = await query(connection, querySql, userId);
         const roleIds = list.map(item => item.roleId);
         return roleIds;
@@ -57,11 +57,11 @@ class UserDao {
      * @return {Promise.<void>}
      */
     static async insertUserRoleRelations (connection, userId, roleIds) {
-        const sql = `INSERT INTO sys_role_users_user(roleId, userId) VALUES (?, ?)`;
+        const sql = `INSERT INTO sys_r_user_role(roleId, userId) VALUES (?, ?)`;
         let i, roleId;
         for (i = 0; i < roleIds.length; i++) {
             roleId = roleIds[i];
-            await db.insert(connection, sql, [ roleId, userId ], true);
+            await insert(connection, sql, [ roleId, userId ], true);
         }
     }
 
@@ -73,7 +73,7 @@ class UserDao {
      * @return {Promise.<void>}
      */
     static async deleteUserRoleRelations (connection, userId, roleIds) {
-        const sql = `DELETE FROM sys_role_users_user WHERE roleId = ? AND  userId = ?`;
+        const sql = `DELETE FROM sys_r_user_role WHERE roleId = ? AND  userId = ?`;
         let i, roleId;
         for (i = 0; i < roleIds.length; i++) {
             roleId = roleIds[i];

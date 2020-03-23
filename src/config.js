@@ -15,7 +15,7 @@ module.exports = {
         // 密码
         password: 'root',
         // 数据库名
-        database: 'server-demo',
+        database: 'server-demo-mysql',
         // 连接池允许创建的最大连接数，默认值为10
         connectionLimit: 2,
         // 允许挂起的最大连接数,默认值为0,代表挂起的连接数无限制

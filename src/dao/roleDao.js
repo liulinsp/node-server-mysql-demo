@@ -12,7 +12,7 @@ class RoleDao {
      */
     static async queryRoleById (connection, id) {
         const sql = `SELECT role.id, role.name, role.enable, role.deleteFlag,
-                            role.creator, role.createTime, role.updater, role.updateTime
+                            role.createTime, role.updateTime
                    FROM sys_role role
                    WHERE role.id = ?`;
         const role = await queryOne(connection, sql, id);
@@ -26,7 +26,7 @@ class RoleDao {
      */
     static async queryRoles (connection) {
         const sql = `SELECT role.id, role.name, role.enable, role.deleteFlag,
-                            role.creator, role.createTime, role.updater, role.updateTime
+                            role.createTime, role.updateTime
                    FROM sys_role role`;
         const list = await query(connection, sql);
         return list;
@@ -40,9 +40,9 @@ class RoleDao {
      */
     static async queryRolesByUserId (connection, userId) {
         const sql = `SELECT role.id, role.name, role.enable, role.deleteFlag,
-                            role.creator, role.createTime, role.updater, role.updateTime
+                            role.createTime, role.updateTime
                    FROM sys_role role
-                   LEFT OUTER JOIN sys_role_users_user r
+                   LEFT OUTER JOIN sys_r_user_role r
                    ON role.id = r.roleId
                    WHERE r.userId = ?`;
         const roles = await query(connection, sql, userId);
