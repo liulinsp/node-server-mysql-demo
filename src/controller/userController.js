@@ -3,7 +3,7 @@
  */
 const UserService = require('../service/userService');
 
-class UserControler {
+class UserController {
     /**
      * 获取所有用户
      * @param ctx 上下文
@@ -57,4 +57,4 @@ class UserControler {
     }
 }
 
-module.exports = UserControler;
+module.exports = UserController;

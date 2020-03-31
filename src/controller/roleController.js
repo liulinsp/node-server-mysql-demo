@@ -3,7 +3,7 @@
  */
 const RoleService = require('../service/roleService');
 
-class RoleControler {
+class RoleController {
 
     static async getRoles (ctx) {
         const roles = await RoleService.findRoles();
@@ -17,4 +17,4 @@ class RoleControler {
     }
 }
 
-module.exports = RoleControler;
+module.exports = RoleController;

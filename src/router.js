@@ -2,8 +2,8 @@
  * 路由
  */
 const KoaRouter = require('koa-router');
-const UserController = require('./controler/userControler');
-const RoleController = require('./controler/roleControler');
+const UserController = require('./controller/userController');
+const RoleController = require('./controller/roleController');
 
 const router = new KoaRouter();
 router.get('/', (ctx, next) => {
